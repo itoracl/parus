@@ -18,8 +18,19 @@
 # ---------------
 FROM mcr.microsoft.com/dotnet/aspnet:3.1 as base
 
+# Labels
+# ------
+LABEL "provider"="@itoracle"                                               \
+      "issues"="https://github.com/itoracl/parus/issues"
 
 
+# Environment variables required for this build (do NOT change)
+# -------------------------------------------------------------
+ENV SVC_BASE=/extra \
+    RUN_FILE="runSvc.sh"
 
 USER dotnet
 WORKDIR /extra
+
+
+CMD $SVC_BASE/$RUN_FILE
