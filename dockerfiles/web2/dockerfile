@@ -1,0 +1,18 @@
+#
+# @ITORACLE DOCKERFILES PROJECT
+# --------------------------
+# This is the Dockerfile for PARUS ERP WEB2 
+# 
+# REQUIRED FILES TO BUILD THIS IMAGE
+# ----------------------------------
+# (1) extra.zip
+#     from ftp Parus SERVCIE disk
+#
+# HOW TO BUILD THIS IMAGE
+# -----------------------
+# Put all downloaded files in the same directory as this Dockerfile
+# Run: 
+#      $ docker build -t parus8561web2${EDITION} . 
+#
+# Pull base image
+# ---------------
