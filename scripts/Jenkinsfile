@@ -10,9 +10,9 @@ pipeline {
        steps {
          container ('podman') {
            script {
-             sh "cd dockerfiles/web2"
-             sh "curl -k https://nexus.local:31111/repository/parus/service/8.561-0823/extra.zip"
-             sh "podman build --tls-verify=false ."
+             sh "wget --no-check-certificate -O dockerfiles/web2 https://nexus.local:31111/repository/parus/service/8.561-0823/extra.zip"
+             sh "cd dockerfiles/web2 \
+              && podman build --tls-verify=false ."
            }
          }
        }
