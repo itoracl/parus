@@ -16,3 +16,10 @@
 #
 # Pull base image
 # ---------------
+FROM mcr.microsoft.com/dotnet/aspnet:3.1 as base
+
+
+
+
+USER dotnet
+WORKDIR /extra
