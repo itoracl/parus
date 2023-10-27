@@ -14,9 +14,17 @@
 # Run: 
 #      $ docker build -t parus8561web2${EDITION} . 
 #
+# Unpack artifacts
+FROM busybox AS unpack
+WORKDIR /unpack
+COPY extra.zip /
+RUN unzip /
+
 # Pull base image
 # ---------------
 FROM mcr.microsoft.com/dotnet/aspnet:3.1 as base
+
+COPY --from=unpack /
 
 # Labels
 # ------
