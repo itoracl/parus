@@ -17,14 +17,14 @@
 # Unpack artifacts
 FROM busybox:latest AS unpack
 WORKDIR /tmp
-COPY extra.zip /tmp
-RUN unzip extra.zip /extra
+COPY extra.zip .
+RUN unzip extra.zip .
 
 # Pull base image
 # ---------------
 FROM mcr.microsoft.com/dotnet/aspnet:3.1
 
-COPY --from=unpack /tmp/ /
+COPY --from=unpack /tmp/extra /
 
 # Labels
 # ------
