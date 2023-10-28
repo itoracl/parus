@@ -18,7 +18,7 @@
 FROM busybox:latest AS unpack
 WORKDIR /tmp
 COPY extra.zip .
-RUN unzip extra.zip /
+RUN unzip extra.zip -d /
 
 # Pull base image
 # ---------------
