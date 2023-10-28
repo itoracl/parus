@@ -15,7 +15,7 @@
 #      $ docker build -t parus8561web2${EDITION} . 
 #
 # Unpack artifacts
-FROM busybox AS unpack
+FROM busybox:latest AS unpack
 WORKDIR /tmp
 COPY extra.zip /tmp
 RUN unzip /extra
