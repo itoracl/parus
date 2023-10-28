@@ -18,13 +18,13 @@
 FROM busybox:latest AS unpack
 WORKDIR /tmp
 COPY extra.zip /tmp
-RUN unzip /extra
+RUN unzip extra.zip /extra
 
 # Pull base image
 # ---------------
 FROM mcr.microsoft.com/dotnet/aspnet:3.1
 
-COPY --from=unpack /
+COPY --from=unpack /tmp/ /
 
 # Labels
 # ------
