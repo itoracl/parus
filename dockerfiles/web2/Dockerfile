@@ -16,13 +16,13 @@
 #
 # Unpack artifacts
 FROM busybox AS unpack
-WORKDIR /unpack
-COPY extra.zip /
-RUN unzip /
+WORKDIR /tmp
+COPY extra.zip /tmp
+RUN unzip /extra
 
 # Pull base image
 # ---------------
-FROM mcr.microsoft.com/dotnet/aspnet:3.1 as base
+FROM mcr.microsoft.com/dotnet/aspnet:3.1
 
 COPY --from=unpack /
 
