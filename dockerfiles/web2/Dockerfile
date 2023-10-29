@@ -18,7 +18,7 @@
 FROM busybox:latest AS unpack
 WORKDIR /tmp
 #COPY extra.zip .
-ADD nexus-nexus-repository-manager.nexus:8081/repository/parus/service/8.561-0823/extra.zip .
+ADD http://nexus-nexus-repository-manager.nexus:8081/repository/parus/service/8.561-0823/extra.zip .
 RUN unzip extra.zip -d /
 
 # Pull base image
