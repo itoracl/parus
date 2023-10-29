@@ -12,7 +12,7 @@
 # -----------------------
 # Put all downloaded files in the same directory as this Dockerfile
 # Run: 
-#      $ docker build -t parus8561web2${EDITION} . 
+#      $ docker build -t parusweb2:8:5:6:1:${EDITION} . 
 #
 # Unpack artifacts
 FROM busybox:latest AS unpack
