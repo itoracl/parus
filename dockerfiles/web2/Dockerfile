@@ -32,6 +32,10 @@ COPY --from=unpack /extra /
 LABEL "provider"="@itoracle"                                               \
       "issues"="https://github.com/itoracl/parus/issues"
 
+EXPOSE 5121
+
+# Environment variables default values
+ENV SVC_NAME="EmbWebProxy"
 
 # Environment variables required for this build (do NOT change)
 # -------------------------------------------------------------
