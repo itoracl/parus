@@ -15,9 +15,9 @@ pipeline {
 //             withEnv(['EDITION = env.BUILD_NUMBER']) {
 //               sh "podman build --tls-verify=false -t parusweb2:8:5:6:1:${EDITION} dockerfiles/web2/. && podman push --creds=jenkins:jenkins --tls-verify=false  nexus-nexus-repository-manager-docker-5000.nexus:5000/parusweb2:8:5:6:1:${EDITION}"
 //             }
-sh "podman build -t parusweb2:8:5:6:1:${BUILD_NUMBER} dockerfiles/web2/. && \
+sh "podman build -t nexus-nexus-repository-manager-docker-5000.nexus:5000/parusweb2:8.561.${BUILD_NUMBER} dockerfiles/web2/. && \
 podman push --creds=jenkins:jenkins --tls-verify=false \
-""nexus-nexus-repository-manager-docker-5000.nexus:5000/parusweb2:8.561.${BUILD_NUMBER}"""
+nexus-nexus-repository-manager-docker-5000.nexus:5000/parusweb2:8.561.${BUILD_NUMBER}"
 
            }
          }
