@@ -17,7 +17,6 @@
 # Unpack artifacts
 FROM busybox:latest AS unpack
 WORKDIR /tmp
-#COPY extra.zip .
 ADD http://nexus-nexus-repository-manager.nexus:8081/repository/parus/service/8.561-0823/extra.zip .
 RUN unzip extra.zip -d /
 COPY . /extra
