@@ -1,105 +1,58 @@
+---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: example-namespace
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: oracle-rdbms-oradata
-  namespace: example-namespace
-  labels:
-    app: oracle-rdbms
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 10Gi
+  name: parus
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: oracle-rdbms-config
-  namespace: example-namespace
+  name: parus-config
   labels:
-    app: oracle-rdbms
+    app: parus-web
 data:
-  ORACLE_CHARACTERSET: "AL32UTF8"
-  ORACLE_EDITION: "enterprise"
-  ORACLE_SID: "ORCLCDB"
-  ORACLE_PDB: "ORCLPDB1"
+  ORACLE_SID: "ORCLPDB1"
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: oracle-rdbms
+  name: parus-web
   labels:
-    app: oracle-rdbms
-  namespace: example-namespace
+    app: parus-web
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: oracle-rdbms
+      app: parus-web
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: oracle-rdbms
+        app: parus-web
     spec:
-      securityContext:
-        runAsUser: 54321
-        fsGroup: 54321
       containers:
-        - name: rdbms
-          image: local-repo/oracle/database:19.3.0-ee
+        - name: parus-web
+          image: cr.nexus.local/parusweb2:8.561.31
           envFrom:
             - configMapRef:
-                name: oracle-rdbms-config
-            - secretRef:
-                name: oracle-rdbms-credentials
+                name: parus-config
+#            - secretRef:
+#                name: parus-credentials
           ports:
-            - containerPort: 1521
-              name: oracle-listener
-            - containerPort: 5500
-              name: oem-express
-          volumeMounts:
-          - name: oradata
-            mountPath: /opt/oracle/oradata
-          readinessProbe:
-            initialDelaySeconds: 60
-            periodSeconds: 60
-            exec:
-              command:
-                - /bin/sh
-                - "-c"
-                - $ORACLE_BASE/$CHECK_DB_FILE
-          livenessProbe:
-            initialDelaySeconds: 300
-            periodSeconds: 60
-            exec:
-              command:
-                - /bin/sh
-                - "-c"
-                - $ORACLE_BASE/$CHECK_DB_FILE
-      volumes:
-        - name: oradata
-          persistentVolumeClaim:
-            claimName: oracle-rdbms-oradata
+            - containerPort: 5121
+              name: parus-embwebproxy
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: database
-  namespace: example-namespace
+  name: embwebproxy
   labels:
-    app: oracle-rdbms
+    app: parus-web
 spec:
   ports:
-    - name: listener
-      port: 1521
-      targetPort: oracle-listener
+    - name: embwebproxy
+      port: 5121
+      targetPort: parus-embwebproxy
   selector:
-    app: oracle-rdbms
+    app: parus-web
