@@ -35,7 +35,7 @@ spec:
     spec:
       containers:
         - name: parus-web
-          image: cr.nexus.local/parusweb2:8.561
+          image: cr.nexus.local:31111/parusweb2:8.561
           envFrom:
             - configMapRef:
                 name: parus-config
