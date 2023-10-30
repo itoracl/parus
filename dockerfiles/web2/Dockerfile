@@ -19,8 +19,8 @@ FROM busybox:latest AS unpack
 WORKDIR /tmp
 ADD http://nexus-nexus-repository-manager.nexus:8081/repository/parus/service/8.561-0823/extra.zip .
 RUN unzip extra.zip -d /
-COPY dockerfiles/web2/runSvc.sh /extra/
-
+#COPY dockerfiles/web2/runSvc.sh /extra/
+COPY /* /extra/
 # Pull base image
 # ---------------
 FROM mcr.microsoft.com/dotnet/aspnet:3.1
