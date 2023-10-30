@@ -21,7 +21,7 @@ pipeline {
       stage("Parus Web Extra Deployment") {
         agent any
         steps {
-          kubeconfig(credentialsId: '8ea73d9c-ecc0-42cf-a7a0-76e3a1526fc2', serverUrl: '') {
+          kubeconfig(credentialsId: '8ea73d9c-ecc0-42cf-a7a0-76e3a1526fc2', serverUrl: '', caCertificate: '') {
             sh "kubectl apply -f samples/kubernetes/embwebproxy.yaml"
           }
         }
