@@ -24,7 +24,7 @@ COPY . /extra
 # Pull base image
 # ---------------
 FROM mcr.microsoft.com/dotnet/aspnet:3.1
-
+RUN useradd -ms /bin/bash dotnet
 COPY --from=unpack /extra /
 
 # Labels
