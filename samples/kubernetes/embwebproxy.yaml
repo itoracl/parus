@@ -8,6 +8,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: parus-config
+  namespace: parus
   labels:
     app: parus-web
 data:
@@ -17,6 +18,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: parus-web
+  namespace: parus
   labels:
     app: parus-web
 spec:
@@ -33,7 +35,7 @@ spec:
     spec:
       containers:
         - name: parus-web
-          image: cr.nexus.local/parusweb2:8.561.31
+          image: cr.nexus.local/parusweb2:8.561
           envFrom:
             - configMapRef:
                 name: parus-config
@@ -41,18 +43,19 @@ spec:
 #                name: parus-credentials
           ports:
             - containerPort: 5121
-              name: parus-embwebproxy
+              name: embwebproxy
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: embwebproxy
+  namespace: parus
   labels:
     app: parus-web
 spec:
   ports:
     - name: embwebproxy
       port: 5121
-      targetPort: parus-embwebproxy
+      targetPort: embwebproxy
   selector:
     app: parus-web
