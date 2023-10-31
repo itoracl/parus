@@ -19,13 +19,15 @@ FROM busybox:latest AS unpack
 WORKDIR /tmp
 ADD http://nexus-nexus-repository-manager.nexus:8081/repository/parus/service/8.561-0823/extra.zip .
 RUN unzip extra.zip -d /
-#COPY dockerfiles/web2/runSvc.sh /extra/
-COPY /runSvc.sh /extra/
+COPY --chmod=555 runSvc.sh /extra/
+
 # Pull base image
 # ---------------
 FROM mcr.microsoft.com/dotnet/aspnet:3.1
 RUN useradd -ms /bin/bash dotnet
-COPY --from=unpack /extra /
+USER dotnet
+WORKDIR /extra
+COPY --from=unpack /extra .
 
 # Labels
 # ------
@@ -41,9 +43,5 @@ ENV SVC_NAME="EmbWebProxy"
 # -------------------------------------------------------------
 ENV SVC_BASE=/extra \
     RUN_FILE="runSvc.sh"
-
-USER dotnet
-WORKDIR /extra
-
 
 CMD $SVC_BASE/$RUN_FILE
