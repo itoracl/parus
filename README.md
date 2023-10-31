@@ -62,6 +62,8 @@ Ping? Pong!
 ```
 Запрос также отображается в логах:
 
+![IMG_1360](https://github.com/itoracl/parus/assets/115593821/0a7b482c-8999-4531-990e-8056aa8f491c)
+
 
 
 
