@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "parusweb.fullname" . }}-test-connection"
+  labels:
+    {{- include "parusweb.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "parusweb.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never
