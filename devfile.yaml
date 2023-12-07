@@ -1,0 +1,20 @@
+schemaVersion: 2.1.0
+metadata:
+  attributes:
+    metadata-name-field: generateName
+    metadata-name-original-value: parus
+  name: parus
+  namespace: test-test-com-che-93j60f
+attributes:
+  che-theia.eclipse.org/sidecar-policy: mergeImage
+projects:
+  - attributes: {}
+    name: parus
+    git:
+      remotes:
+        origin: https://github.com/itoracl/parus.git
+components:
+  - name: universal-developer-image
+    container:
+      image: quay.io/devfile/universal-developer-image:ubi8-latest
+commands: []
