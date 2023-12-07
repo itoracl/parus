@@ -7,6 +7,8 @@ metadata:
   namespace: test-test-com-che-93j60f
 attributes:
   che-theia.eclipse.org/sidecar-policy: mergeImage
+variables:
+  KUBEDOCK_ENABLED: 'true'
 projects:
   - attributes: {}
     name: parus
