@@ -4,7 +4,7 @@ metadata:
     metadata-name-field: generateName
     metadata-name-original-value: parus
   name: parus
-  namespace: test-test-com-che-93j60f
+  #namespace: test-test-com-che-93j60f
 attributes:
   che-theia.eclipse.org/sidecar-policy: mergeImage
 variables:
